@@ -1,0 +1,37 @@
+language: scala
+scala: 2.11.12
+dist: xenial
+jdk: openjdk8
+
+addons:
+  apt:
+    packages:
+      - openjdk-8-jdk
+      - libunwind-dev
+      - libgc-dev
+      - libre2-dev
+      - clang-6.0
+
+env:
+  global:
+    - JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+    - PATH=$JAVA_HOME/bin:$PATH
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt
+
+script:
+  - sbt 'scalafix --check' 'test:scalafix --check' 'it:scalafix --check' &&
+    sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck it:scalafmtCheck &&
+    sbt clean re/compile re/test:compile re/it:compile &&
+    sbt coverage reJS/test reJVM/test reJS/it:test reJVM/it:test coverageReport &&
+    sbt coverageAggregate &&
+    sbt scalastyle test:scalastyle it:scalastyle &&
+    sbt scapegoat cpd stats
+
+after_success:
+  - sbt coveralls
+  - bash <(curl -s https://codecov.io/bash)
+
