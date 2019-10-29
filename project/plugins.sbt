@@ -14,8 +14,6 @@ addSbtPlugin("org.scoverage" % "sbt-coveralls" % "1.2.7")
 addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.7")
 //// Scalafmt - Code formatter for Scala
 addSbtPlugin("com.geirsson" % "sbt-scalafmt" % "1.5.1")
-//// sbt-scalariform - sbt plugin adding support for source code formatting using Scalariform
-//addSbtPlugin("org.scalariform" % "sbt-scalariform" % "1.8.2")
 
 // static code analysis read-only
 //// Scalastyle - Scala style checker

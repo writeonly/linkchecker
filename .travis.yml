@@ -7,10 +7,6 @@ addons:
   apt:
     packages:
       - openjdk-8-jdk
-      - libunwind-dev
-      - libgc-dev
-      - libre2-dev
-      - clang-6.0
 
 env:
   global:
@@ -24,9 +20,9 @@ cache:
 
 script:
   - sbt 'scalafix --check' 'test:scalafix --check' 'it:scalafix --check' &&
-    sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck it:scalafmtCheck &&
-    sbt clean re/compile re/test:compile re/it:compile &&
-    sbt coverage reJS/test reJVM/test reJS/it:test reJVM/it:test coverageReport &&
+    sbt scalafmtCheck test:scalafmtCheck it:scalafmtCheck &&
+    sbt clean hyde/compile hyde/test:compile hyde/it:compile &&
+    sbt coverage hyde/test hyde/it:test coverageReport &&
     sbt coverageAggregate &&
     sbt scalastyle test:scalastyle it:scalastyle &&
     sbt scapegoat cpd stats
