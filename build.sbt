@@ -16,7 +16,7 @@ val ScalaFixScalacOptionsOff = Seq(
 val mainClassString = "pl.writeonly.re.main.Main"
 val mainClassSome = Some(mainClassString)
 
-scalaVersion := "2.11.12"
+scalaVersion := "2.12.10"
 scapegoatVersion in ThisBuild := "1.3.8"
 scalacOptions ++= scalacOptionsFor(scalaVersion.value)
 val ScalaPropsVersion = "0.5.5"
@@ -24,7 +24,7 @@ val SloggingVersion = "0.6.1"
 val ScalazVersion = "7.2.28"
 
 val SharedSettings = Seq(
-  scalaVersion := "2.11.12",
+  scalaVersion := "2.12.10",
   scalacOptions ++= scalacOptionsFor(scalaVersion.value),
   scalacOptions ++= ScalaFixScalacOptions,
   scalacOptions --= ScalaFixScalacOptionsOff,
