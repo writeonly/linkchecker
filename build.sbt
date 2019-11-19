@@ -13,7 +13,7 @@ val ScalaFixScalacOptionsOff = Seq(
   "-Xfatal-warnings",   // it should be disabled for scalafix
 )
 
-val mainClassString = "pl.writeonly.re.main.Main"
+val mainClassString = "pl.writeonly.scala.hyde.impl.Hyde"
 val mainClassSome = Some(mainClassString)
 
 scalaVersion := "2.12.10"
@@ -28,7 +28,7 @@ val SharedSettings = Seq(
   scalacOptions ++= scalacOptionsFor(scalaVersion.value),
   scalacOptions ++= ScalaFixScalacOptions,
   scalacOptions --= ScalaFixScalacOptionsOff,
-  mainClass in (Compile, run) := Some("pl.writeonly.re.main.Main"),
+  mainClass in (Compile, run) := Some(mainClassString),
   testFrameworks += new TestFramework("utest.runner.Framework"),
   resolvers += Opts.resolver.sonatypeReleases,
   libraryDependencies += "com.lihaoyi" %%% "utest" % "0.6.5" % "test",
