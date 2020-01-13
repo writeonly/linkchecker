@@ -11,6 +11,10 @@ import pl.writeonly.scala.hyde.impl.std.std1.EitherHyde
 import pl.writeonly.scala.hyde.impl.std.std2.EitherBeginHyde
 import pl.writeonly.scala.hyde.impl.std.std3.EitherEndHyde
 import pl.writeonly.scala.hyde.impl.std.std4.FutureHyde
+import pl.writeonly.scala.hyde.impl.thirdparty.thirdparty1.DisjunctionHyde
+import pl.writeonly.scala.hyde.impl.thirdparty.thirdparty2.DisjunctionBeginHyde
+import pl.writeonly.scala.hyde.impl.thirdparty.thirdparty3.DisjunctionEndHyde
+import pl.writeonly.scala.hyde.impl.thirdparty.thirdparty4.TaskHyde
 import slogging._
 
 object Hyde {
@@ -23,6 +27,9 @@ object Hyde {
     oo
 
     std()
+
+    thirdParty()
+
 
     println("end of program")
   }
@@ -63,6 +70,28 @@ object Hyde {
       FutureHyde.apply()
     }
     println(futureState.throwableList.size.toString)
+  }
+
+  def thirdParty(): Unit = {
+    val disjunctionState = time("DisjunctionHyde") {
+      DisjunctionHyde.apply()
+    }
+    println(disjunctionState.throwableList.size.toString)
+
+    val disjunctionBeginState = time("DisjunctionBeginHyde") {
+      DisjunctionBeginHyde.apply()
+    }
+    println(disjunctionBeginState.throwableList.size.toString)
+
+    val disjunctionEndState = time("DisjunctionEndHyde") {
+      DisjunctionEndHyde.apply()
+    }
+    println(disjunctionEndState.throwableList.size.toString)
+
+    val taskState = time("TaskHyde") {
+      TaskHyde.apply()
+    }
+    println(taskState.throwableList.size.toString)
   }
 
   def time[R](name: String)(block: => R): R = {
