@@ -20,7 +20,6 @@ cache:
 
 script:
   - sbt 'scalafix --check' 'test:scalafix --check' 'it:scalafix --check' &&
-    sbt scalafmtCheck test:scalafmtCheck it:scalafmtCheck &&
     sbt clean hyde/compile hyde/test:compile hyde/it:compile &&
     sbt coverage hyde/test hyde/it:test coverageReport &&
     sbt coverageAggregate &&
