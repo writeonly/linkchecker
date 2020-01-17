@@ -1,10 +1,10 @@
-# Hyde
-Mr. Hyde - script for testing internal links 
+# LinkChecker
+Link Checker - script for testing internal links 
 
 Clone:
 ```bash
-git clone https://github.com/writeonly/hyde.git
-cd hyde
+git clone https://github.com/writeonly/linkchecker.git
+cd linkchecker
 ```
 
 Refactor and reformat:
@@ -15,14 +15,14 @@ sbt scalafmtSbt scalafmt test:scalafmt it:scalafmt
 
 Check lint and format:
 ```bash
-sbt 'hyde/scalafix --check' 'hyde/test:scalafix --check' 'hyde/it:scalafix --check' &&
-sbt scalafmtSbtCheck hyde/scalafmtCheck hyde/test:scalafmtCheck hyde/it:scalafmtCheck
+sbt 'linkchecker/scalafix --check' 'linkchecker/test:scalafix --check' 'linkchecker/it:scalafix --check' &&
+sbt scalafmtSbtCheck linkchecker/scalafmtCheck linkchecker/test:scalafmtCheck linkchecker/it:scalafmtCheck
 ```
 
 Compile, test and generate coverage report:
 ```bash
 sbt clean compile test:compile it:compile &&
-sbt coverage hyde/test hyde/it:test coverageReport &&
+sbt coverage linkchecker/test linkchecker/it:test coverageReport &&
 sbt coverageAggregate
 ```
 
@@ -34,10 +34,10 @@ sbt scapegoat cpd stats
 
 All:
 ```bash
-sbt hyde/scalafix hyde/test:scalafix hyde/it:scalafix &&
-sbt hyde/scalafmtSbt hyde/scalafmt hyde/test:scalafmt hyde/it:scalafmt &&
-sbt clean hyde/compile hyde/test:compile hyde/it:compile hyde/test &&
-sbt coverage hyde/test hyde/it:test coverageReport &&
+sbt linkchecker/scalafix linkchecker/test:scalafix linkchecker/it:scalafix &&
+sbt linkchecker/scalafmtSbt linkchecker/scalafmt linkchecker/test:scalafmt linkchecker/it:scalafmt &&
+sbt clean linkchecker/compile linkchecker/test:compile linkchecker/it:compile linkchecker/test &&
+sbt coverage linkchecker/test linkchecker/it:test coverageReport &&
 sbt coverageAggregate &&
 sbt scalastyle test:scalastyle it:scalastyle &&
 sbt scapegoat cpd stats
@@ -45,5 +45,5 @@ sbt scapegoat cpd stats
 
 Run:
 ```bash
-sbt hyde/run
+sbt linkchecker/run
 ```

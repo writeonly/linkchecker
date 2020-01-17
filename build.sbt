@@ -13,7 +13,7 @@ val ScalaFixScalacOptionsOff = Seq(
   "-Xfatal-warnings",   // it should be disabled for scalafix
 )
 
-val mainClassString = "pl.writeonly.scala.hyde.impl.Hyde"
+val mainClassString = "pl.writeonly.linkchecker.scala.impl.LinkCheckerApp"
 val mainClassSome = Some(mainClassString)
 
 scalaVersion := "2.12.10"
@@ -59,7 +59,7 @@ val jvmSettings = Seq(
   ),
 )
 
-lazy val hyde = crossProject(JVMPlatform)
+lazy val linkchecker = crossProject(JVMPlatform)
   .withoutSuffixFor(JVMPlatform)
   .crossType(CrossType.Full)
   .settings(SharedSettings)
@@ -75,6 +75,6 @@ lazy val hyde = crossProject(JVMPlatform)
   // PropsTest
   .settings(scalapropsCoreSettings)
 
-lazy val hydeJVM = hyde.jvm
+lazy val hydeJVM = linkchecker.jvm
 
 
