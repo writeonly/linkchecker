@@ -1,12 +1,13 @@
 package pl.writeonly.linkchecker.scala.impl.oo.oo1
 
 import pl.writeonly.linkchecker.scala.common.states.oo.AbstractOOState
+import pl.writeonly.linkchecker.scala.impl.Apps.AbstractOOStateApply
 
-object StandardExceptionApp {
+object StandardExceptionApp extends App with AbstractOOStateApply {
 
   private val domain = "https://www.writeonly.pl"
 
-  def main(args: Array[String]): Unit = apply().showResult()
+  apply().showResult()
 
   def apply(): AbstractOOState = StandardExceptionState(domain)
 }

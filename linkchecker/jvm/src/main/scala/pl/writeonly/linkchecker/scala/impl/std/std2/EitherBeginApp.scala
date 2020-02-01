@@ -3,8 +3,9 @@ package pl.writeonly.linkchecker.scala.impl.std.std2
 import scala.concurrent.ExecutionContext.Implicits.global
 
 import pl.writeonly.linkchecker.scala.common.states.notexception.AbstractNextState
+import pl.writeonly.linkchecker.scala.impl.Apps.AbstractNextStateApply
 
-object EitherBeginApp {
+object EitherBeginApp extends AbstractNextStateApply {
 
   private val domain = "https://www.writeonly.pl"
 

@@ -4,6 +4,17 @@ import java.text.NumberFormat
 
 import scala.util.Try
 
+import pl.writeonly.linkchecker.scala.impl.io.io0.IOApp
+import pl.writeonly.linkchecker.scala.impl.io.io1.IO2App
+import pl.writeonly.linkchecker.scala.impl.io.io2.Task2App
+import pl.writeonly.linkchecker.scala.impl.io.io3.IO3App
+import pl.writeonly.linkchecker.scala.impl.io.io4.Task3App
+import pl.writeonly.linkchecker.scala.impl.io.io5.UIO3App
+import pl.writeonly.linkchecker.scala.impl.monad.monad0.DisjunctionApp
+import pl.writeonly.linkchecker.scala.impl.monad.monad1.ValidationApp
+import pl.writeonly.linkchecker.scala.impl.monad.monad2.ValidationBeginApp
+import pl.writeonly.linkchecker.scala.impl.monad.monad3.ValidationEndApp
+import pl.writeonly.linkchecker.scala.impl.monad.monad4.TaskApp
 import pl.writeonly.linkchecker.scala.impl.oo.oo1.StandardExceptionApp
 import pl.writeonly.linkchecker.scala.impl.oo.oo2.WrappingExceptionApp
 import pl.writeonly.linkchecker.scala.impl.std.std0.TryApp
@@ -11,11 +22,6 @@ import pl.writeonly.linkchecker.scala.impl.std.std1.EitherApp
 import pl.writeonly.linkchecker.scala.impl.std.std2.EitherBeginApp
 import pl.writeonly.linkchecker.scala.impl.std.std3.EitherEndApp
 import pl.writeonly.linkchecker.scala.impl.std.std4.FutureApp
-import pl.writeonly.linkchecker.scala.impl.thirdparty.thirdparty0.DisjunctionApp
-import pl.writeonly.linkchecker.scala.impl.thirdparty.thirdparty1.ValidationApp
-import pl.writeonly.linkchecker.scala.impl.thirdparty.thirdparty2.ValidationBeginApp
-import pl.writeonly.linkchecker.scala.impl.thirdparty.thirdparty3.ValidationEndApp
-import pl.writeonly.linkchecker.scala.impl.thirdparty.thirdparty4.TaskApp
 import slogging._
 
 object LinkCheckerApp {
@@ -29,7 +35,9 @@ object LinkCheckerApp {
 
     std()
 
-    thirdParty()
+    monad()
+
+    io()
 
     println("end of program")
   }
@@ -73,7 +81,7 @@ object LinkCheckerApp {
     println(futureState.throwableList.size.toString)
   }
 
-  def thirdParty(): Unit = {
+  def monad(): Unit = {
     val disjunctionState = time("DisjunctionApp") {
       DisjunctionApp.apply()
     }
@@ -98,6 +106,39 @@ object LinkCheckerApp {
       TaskApp.apply()
     }
     println(taskState.throwableList.size.toString)
+  }
+
+  def io(): Unit = {
+
+    val ioState = time("IOApp") {
+      IOApp.apply()
+    }
+    println(ioState.throwableList.size.toString)
+
+    val io2State = time("IO2App") {
+      IO2App.apply()
+    }
+    println(io2State.throwableList.size.toString)
+
+    val task2State = time("Task2App") {
+      Task2App.apply()
+    }
+    println(task2State.throwableList.size.toString)
+
+    val io3State = time("IO3App") {
+      IO3App.apply()
+    }
+    println(io3State.throwableList.size.toString)
+
+    val task3State = time("Task3App") {
+      Task3App.apply()
+    }
+    println(task3State.throwableList.size.toString)
+
+    val uio3State = time("UIO3App") {
+      UIO3App.apply()
+    }
+    println(uio3State.throwableList.size.toString)
   }
 
   def time[R](name: String)(block: => R): R = {

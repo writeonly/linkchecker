@@ -15,16 +15,18 @@ val ScalaFixScalacOptionsOff = Seq(
 
 val mainClassString = "pl.writeonly.linkchecker.scala.impl.LinkCheckerApp"
 val mainClassSome = Some(mainClassString)
+val Scala12Version = "2.12.10"
 
-scalaVersion := "2.12.10"
+scalaVersion := Scala12Version
 scapegoatVersion in ThisBuild := "1.3.8"
 scalacOptions ++= scalacOptionsFor(scalaVersion.value)
 val ScalaPropsVersion = "0.5.5"
 val SloggingVersion = "0.6.1"
-val ScalazVersion = "7.2.28"
+val ScalazVersion = "7.2.30"
+val ZioVersion = "1.0.0-RC17"
 
 val SharedSettings = Seq(
-  scalaVersion := "2.12.10",
+  scalaVersion := Scala12Version,
   scalacOptions ++= scalacOptionsFor(scalaVersion.value),
   scalacOptions ++= ScalaFixScalacOptions,
   scalacOptions --= ScalaFixScalacOptionsOff,
@@ -40,10 +42,8 @@ val SharedSettings = Seq(
   libraryDependencies += "org.scalaz" %% "scalaz-concurrent" % ScalazVersion,
   libraryDependencies += "org.scalaz" %%% "scalaz-effect" % ScalazVersion,
   libraryDependencies += "org.scalaz" %% "scalaz-ioeffect" % "2.10.1",
-  libraryDependencies ++= Seq(
-    "biz.enef" %%% "slogging" % SloggingVersion,
-  ),
-  libraryDependencies += "com.lihaoyi" %%% "fastparse" % "1.0.0",
+  libraryDependencies += "biz.enef" %%% "slogging" % SloggingVersion,
+  libraryDependencies += "dev.zio" %% "zio" % ZioVersion,
   addCompilerPlugin(scalafixSemanticdb),
   wartremoverErrors ++= Warts.unsafe,
   scapegoatVersion := "1.3.8",

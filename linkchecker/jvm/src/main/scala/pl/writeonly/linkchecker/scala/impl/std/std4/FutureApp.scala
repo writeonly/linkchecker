@@ -5,15 +5,16 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._
 
 import pl.writeonly.linkchecker.scala.common.states.api.std._
+import pl.writeonly.linkchecker.scala.impl.Apps.Effect
 
-object FutureApp {
+object FutureApp extends Effect[EitherAPIState, ParallelStateFuture] {
 
   private val domain = "https://www.writeonly.pl"
 
   def main(args: Array[String]): Unit = apply().showResult()
 
-  def apply(): EitherAPIState = Await.result(applyFuture(), 1.minute)
+  def apply(): EitherAPIState = Await.result(effect(), 1.minute)
 
-  def applyFuture(): ParallelStateFuture = FutureState(domain)
+  def effect(): ParallelStateFuture = FutureState(domain)
 
 }

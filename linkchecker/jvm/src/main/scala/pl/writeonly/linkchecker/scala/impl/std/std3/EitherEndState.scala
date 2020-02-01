@@ -10,6 +10,16 @@ import pl.writeonly.linkchecker.scala.common.url.urls.UrlsWithThrowableList
 import pl.writeonly.linkchecker.scala.sourcepage.std._
 import scalaz.Scalaz._
 
+object EitherEndState {
+
+  def apply(domain: String)(implicit ec: ExecutionContext): AbstractNextState = fromDomain(new Domain(domain)) |> AbstractNextState.run
+
+  private def fromDomain(domain: Domain)(implicit ec: ExecutionContext): AbstractNextState = fromDomainAllImplicit(domain, ec)
+
+  private def fromDomainAllImplicit(implicit d: Domain, ec: ExecutionContext): AbstractNextState =
+    new EitherEndState(UrlsWithThrowableList.fromDomain)
+}
+
 class EitherEndState(data: UrlsWithThrowableList)(implicit d: Domain, ec: ExecutionContext) extends EitherAPIState(data) with AbstractNextState {
 
   override protected def nextState(data: UrlsWithThrowableList): AbstractNextState = new EitherEndState(data)
@@ -25,14 +35,4 @@ class EitherEndState(data: UrlsWithThrowableList)(implicit d: Domain, ec: Execut
 
     Await.result(monad, 1.minute)
   }
-}
-
-object EitherEndState {
-
-  def apply(domain: String)(implicit ec: ExecutionContext): AbstractNextState = fromDomain(new Domain(domain)) |> AbstractNextState.run
-
-  private def fromDomain(domain: Domain)(implicit ec: ExecutionContext): AbstractNextState = fromDomainAllImplicit(domain, ec)
-
-  private def fromDomainAllImplicit(implicit d: Domain, ec: ExecutionContext): AbstractNextState =
-    new EitherEndState(UrlsWithThrowableList.fromDomain)
 }
