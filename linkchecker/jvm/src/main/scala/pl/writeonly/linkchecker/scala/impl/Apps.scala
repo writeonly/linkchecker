@@ -6,14 +6,14 @@ import pl.writeonly.linkchecker.scala.common.states.oo.AbstractOOState
 
 object Apps {
 
-  trait Apply[RESULT] extends (() => RESULT)
+  trait Apply[A] extends (() => A)
 
   type AbstractOOStateApply = Apply[AbstractOOState]
   type AbstractNextStateApply = Apply[AbstractNextState]
 
-  trait Effect[RESULT, EFFECT] extends Apply[RESULT] {
-    def effect(): EFFECT
+  trait Effect[A, E] extends Apply[A] {
+    def effect(): E
   }
 
-  type ValidationAPIStateEffect[EFFECT] = Effect[ValidationAPIState, EFFECT]
+  type ValidationAPIStateEffect[E] = Effect[ValidationAPIState, E]
 }
