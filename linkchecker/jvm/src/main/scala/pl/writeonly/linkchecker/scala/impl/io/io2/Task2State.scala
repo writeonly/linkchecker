@@ -1,6 +1,6 @@
 package pl.writeonly.linkchecker.scala.impl.io.io2
 
-import pl.writeonly.linkchecker.scala.common.states.api.io.ParallelStateTask2
+import pl.writeonly.linkchecker.scala.common.states.api.io.PureStateTask2
 import pl.writeonly.linkchecker.scala.common.states.api.monad.ValidationAPIState
 import pl.writeonly.linkchecker.scala.common.url.Domain
 import pl.writeonly.linkchecker.scala.common.url.urls.UrlsWithThrowableList
@@ -12,7 +12,7 @@ object Task2State {
 
   def fromDomain(implicit d: Domain): Task2State = new Task2State(UrlsWithThrowableList.fromDomain)
 
-  def run(state: Task2State): ParallelStateTask2 =
+  def run(state: Task2State): PureStateTask2 =
     if (state.isEmptyNextInternalUrls) Task.now(state) else state.nextMonad.flatMap(run)
 
   private def sequence(set: Set[Task[SourcePageValidation]]): Task[SourcePageValidationSet] =

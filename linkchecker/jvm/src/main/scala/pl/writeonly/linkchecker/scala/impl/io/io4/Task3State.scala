@@ -1,6 +1,6 @@
 package pl.writeonly.linkchecker.scala.impl.io.io4
 
-import pl.writeonly.linkchecker.scala.common.states.api.io.ParallelStateTask3
+import pl.writeonly.linkchecker.scala.common.states.api.io.PureStateTask3
 import pl.writeonly.linkchecker.scala.common.states.api.monad.ValidationAPIState
 import pl.writeonly.linkchecker.scala.common.url.Domain
 import pl.writeonly.linkchecker.scala.common.url.urls.UrlsWithThrowableList
@@ -13,7 +13,7 @@ object Task3State {
   def fromDomain(implicit d: Domain): Task3State = new Task3State(UrlsWithThrowableList.fromDomain)
 
   @SuppressWarnings(Array("org.wartremover.warts.Any"))
-  def run(state: Task3State): ParallelStateTask3 =
+  def run(state: Task3State): PureStateTask3 =
     if (state.isEmptyNextInternalUrls) ZIO.effect(state) else state.nextMonad.flatMap(run)
 
   private def sequence(set: Set[Task[SourcePageValidation]]): Task[SourcePageValidationSet] =
