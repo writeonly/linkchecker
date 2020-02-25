@@ -1,13 +1,12 @@
 package pl.writeonly.linkchecker.scala.impl.io.io1
 
-import pl.writeonly.linkchecker.scala.common.states.api.io.PureStateIO2
 import pl.writeonly.linkchecker.scala.common.states.api.monad.ValidationAPIState
 import pl.writeonly.linkchecker.scala.common.url.Domain
 import pl.writeonly.linkchecker.scala.impl.Apps.ValidationAPIStateEffect
 import scalaz.Scalaz._
 import scalaz.ioeffect._
 
-object IO2App extends SafeApp with ValidationAPIStateEffect[PureStateIO2] {
+object IO2App extends SafeApp with ValidationAPIStateEffect[IO[Throwable, ValidationAPIState]] {
 
   private val domain = "https://www.writeonly.pl"
 
@@ -16,5 +15,5 @@ object IO2App extends SafeApp with ValidationAPIStateEffect[PureStateIO2] {
 
   def apply(): ValidationAPIState = unsafePerformIO(effect())
 
-  def effect(): PureStateIO2 = IO2State.fromDomain(new Domain(domain)) |> IO2State.run
+  def effect(): IO[Throwable, ValidationAPIState] = IO2State.fromDomain(new Domain(domain)) |> IO2State.run
 }

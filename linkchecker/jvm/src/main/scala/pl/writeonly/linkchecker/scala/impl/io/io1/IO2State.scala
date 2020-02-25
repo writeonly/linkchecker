@@ -1,6 +1,5 @@
 package pl.writeonly.linkchecker.scala.impl.io.io1
 
-import pl.writeonly.linkchecker.scala.common.states.api.io.PureStateIO2
 import pl.writeonly.linkchecker.scala.common.states.api.monad.ValidationAPIState
 import pl.writeonly.linkchecker.scala.common.url.Domain
 import pl.writeonly.linkchecker.scala.common.url.urls.UrlsWithThrowableList
@@ -12,7 +11,7 @@ object IO2State {
 
   def fromDomain(implicit d: Domain): IO2State = new IO2State(UrlsWithThrowableList.fromDomain)
 
-  def run(state: IO2State): PureStateIO2 =
+  def run(state: IO2State): IO[Throwable, ValidationAPIState] =
     if (state.isEmptyNextInternalUrls) IO.now(state) else state.nextMonad.flatMap(run)
 
   private def sequence(set: Set[IO[Throwable, SourcePageValidation]]): IO[Throwable, SourcePageValidationSet] =

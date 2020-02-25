@@ -5,7 +5,7 @@ import pl.writeonly.linkchecker.scala.common.url.Domain
 import pl.writeonly.linkchecker.scala.common.url.urls.UrlsWithThrowableList
 import pl.writeonly.linkchecker.scala.sourcepage.io.SourcePageIOFromInternalUrl
 import pl.writeonly.linkchecker.scala.sourcepage.monad._
-import scalaz.effect.IO
+import scalaz.effect._
 
 object IOState {
 
