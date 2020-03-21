@@ -10,9 +10,6 @@ import slogging._
 
 object IOApp extends SafeApp with ValidationAPIStateEffect[IO[ValidationAPIState]] {
 
-  LoggerConfig.factory = SLF4JLoggerFactory()
-  LoggerConfig.level = LogLevel.TRACE
-
   private val domain = "https://www.writeonly.pl"
 
   override def run(args: ImmutableArray[String]): IO[Unit] = effect().map(_.showResult())
