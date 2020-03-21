@@ -1,3 +1,3 @@
 package pl.writeonly.linkchecker.scala.common.url.exception
 
-class NonRelativeUrlException(url: String) extends IllegalArgumentException(url)
+class NonRelativeUrlException(message: String) extends IllegalArgumentException(message)

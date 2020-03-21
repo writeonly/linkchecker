@@ -4,7 +4,7 @@ import pl.writeonly.linkchecker.scala.common.url.typed._
 
 class Domain(domain: WrappedUrl) {
 
-  def this(url: String) = this(new WrappedUrl(url))
+  def this(url: String) = this(WrappedUrl.fromUrl(url))
 
   println("domain " + toString)
 
@@ -12,7 +12,7 @@ class Domain(domain: WrappedUrl) {
 
   def toInternalUrl: InternalUrl = InternalUrl(domain)(this)
 
-  def toInternalUrl(url: WrappedUrl): InternalUrl = new InternalUrl(domain.append(url))
+  def toInternalUrl(url: WrappedUrl): InternalUrl = new InternalUrl(url.append(domain))
 
   def isInternalUrl(url: WrappedUrl): Boolean = url.isInternalUrl(domain)
 

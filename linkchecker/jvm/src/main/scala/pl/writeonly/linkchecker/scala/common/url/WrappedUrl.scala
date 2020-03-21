@@ -5,23 +5,24 @@ import java.net._
 import pl.writeonly.linkchecker.scala.common.url.exception._
 import pl.writeonly.linkchecker.scala.common.url.typed._
 
-final case class WrappedUrl(private val url: String) extends Ordered[WrappedUrl] {
+@SuppressWarnings(Array("org.wartremover.warts.Throw"))
+final case class WrappedUrl(private val url: String)(implicit private val parent: Option[InternalUrl]) extends Ordered[WrappedUrl] {
 
-  override def toString: String = url
+  override def toString: String = s"$url $parent"
 
   override def compare(that: WrappedUrl): Int = url.compareTo(that.url)
 
-  def append(that: WrappedUrl): WrappedUrl = new WrappedUrl(url + that.url)
+  def append(domain: WrappedUrl): WrappedUrl = WrappedUrl(domain.url + url)
 
   def toURL: URL = new URL(url)
 
   def toURI: URI = URI.create(url)
 
-  def toException(e: Throwable): UrlException = new UrlException(url, e)
+  def toException(e: Throwable): UrlException = new UrlException(toString, e)
 
-  def toNonInternalException: NonInternalUrlException = new NonInternalUrlException(url)
+  def toNonInternalException: NonInternalUrlException = new NonInternalUrlException(toString)
 
-  def toNonRelativeException: NonRelativeUrlException = new NonRelativeUrlException(url)
+  def toNonRelativeException: NonRelativeUrlException = new NonRelativeUrlException(toString)
 
   def isRelativeUrl: Boolean = url.startsWith("/")
 
@@ -46,4 +47,8 @@ object WrappedUrl {
   val Internal = 'internal
   val Relative = 'relative
   val External = 'external
+
+  def create(url: String)(implicit internalUrl: InternalUrl): WrappedUrl = WrappedUrl(url)(Some(internalUrl))
+
+  def fromUrl(url: String): WrappedUrl = WrappedUrl(url)(Option.empty)
 }

@@ -10,7 +10,7 @@ final case class UrlsWithThrowableList(urls: Urls, throwableList: ThrowableList)
 
   def showStep(): Unit = {
     urls.showStep()
-    Urls.showPartThrowableList(details = false, "throwableList", throwableList)
+    Urls.showPartThrowableList(details = true, "throwableList", throwableList)
   }
 
   def showResult(): Unit = {

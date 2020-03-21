@@ -6,8 +6,12 @@ import pl.writeonly.linkchecker.scala.impl.Apps.ValidationAPIStateEffect
 import scalaz.ImmutableArray
 import scalaz.Scalaz._
 import scalaz.effect._
+import slogging._
 
 object IOApp extends SafeApp with ValidationAPIStateEffect[IO[ValidationAPIState]] {
+
+  LoggerConfig.factory = SLF4JLoggerFactory()
+  LoggerConfig.level = LogLevel.TRACE
 
   private val domain = "https://www.writeonly.pl"
 
