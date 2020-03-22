@@ -1,6 +1,6 @@
 package pl.writeonly.linkchecker.scala.common.url.typed
 
-import java.net.URL
+import java.net._
 
 import pl.writeonly.linkchecker.scala.common.url._
 import pl.writeonly.linkchecker.scala.common.url.exception.UrlException
@@ -14,6 +14,8 @@ final class InternalUrl(private val url: WrappedUrl) extends Ordered[InternalUrl
   def toException(e: Throwable): UrlException = url.toException(e)
 
   def toURL: URL = url.toURL
+
+  def toURI: URI = url.toURI
 }
 
 object InternalUrl {

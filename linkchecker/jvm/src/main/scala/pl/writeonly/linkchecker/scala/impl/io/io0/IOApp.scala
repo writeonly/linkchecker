@@ -9,7 +9,7 @@ import scalaz.effect._
 
 object IOApp extends SafeApp with ValidationAPIStateEffect[IO[ValidationAPIState]] {
 
-  private val domain = "https://www.writeonly.pl"
+  private val domain = "https://www.degustujacaistota.pl"
 
   override def run(args: ImmutableArray[String]): IO[Unit] = effect().map(_.showResult())
 
