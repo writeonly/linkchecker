@@ -8,7 +8,12 @@ import scalaz.Scalaz._
 
 object SourcePageFromInternalUrl extends InternalUrlToSourcePage {
 
-  def apply(internalUrl: InternalUrl): SourcePage = SourcePage(bufferedSource(internalUrl))(internalUrl)
+  def apply(internalUrl: InternalUrl): SourcePage = new SourcePageFromInternalUrl(internalUrl).toSourcePage
+}
 
-  def bufferedSource(internalUrl: InternalUrl): Source = internalUrl.toURI.toASCIIString |> Source.fromURL
+class SourcePageFromInternalUrl(internalUrl: InternalUrl) {
+
+  def toSourcePage: SourcePage = internalUrl.toURI.toASCIIString |> Source.fromURL |> toSourcePage
+
+  def toSourcePage(source: Source): SourcePage = SourcePage(source)(internalUrl)
 }
