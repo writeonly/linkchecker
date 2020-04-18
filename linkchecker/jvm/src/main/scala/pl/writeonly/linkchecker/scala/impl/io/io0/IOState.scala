@@ -5,6 +5,7 @@ import pl.writeonly.linkchecker.scala.common.url.Domain
 import pl.writeonly.linkchecker.scala.common.url.urls.UrlsWithThrowableList
 import pl.writeonly.linkchecker.scala.sourcepage.io.SourcePageIOFromInternalUrl
 import pl.writeonly.linkchecker.scala.sourcepage.monad._
+import scalaz.Scalaz._
 import scalaz.effect._
 
 object IOState {
@@ -12,7 +13,7 @@ object IOState {
   def fromDomain(implicit d: Domain): IOState = new IOState(UrlsWithThrowableList.fromDomain)
 
   def run(state: IOState): IO[ValidationAPIState] =
-    if (state.isEmptyNextInternalUrls) IO.apply(state) else state.nextMonad.flatMap(run)
+    if (state.isEmptyNextInternalUrls) IO.apply(state) else state.nextMonad >>= run
 
   private def sequence(set: Set[IO[SourcePageValidation]]): IO[SourcePageValidationSet] =
     set
