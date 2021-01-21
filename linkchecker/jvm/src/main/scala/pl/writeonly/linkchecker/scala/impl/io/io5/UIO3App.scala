@@ -8,7 +8,7 @@ import zio._
 
 object UIO3App extends App with ValidationAPIStateEffect[UIO[ValidationAPIState]] {
 
-  private val domain = "https://www.writeonly.pl"
+  private val domain = "https://writeonly.pl"
 
   @SuppressWarnings(Array("org.wartremover.warts.Any"))
   override def run(args: List[String]): UIO[Int] = effect().as(0)

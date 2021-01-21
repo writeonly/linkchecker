@@ -5,7 +5,7 @@ import pl.writeonly.linkchecker.scala.impl.Apps.ValidationAPIStateEffect
 
 object TaskApp extends ValidationAPIStateEffect[ParallelStateTask] {
 
-  private val domain = "https://www.writeonly.pl"
+  private val domain = "https://writeonly.pl"
 
   def main(args: Array[String]): Unit = apply().showResult()
 

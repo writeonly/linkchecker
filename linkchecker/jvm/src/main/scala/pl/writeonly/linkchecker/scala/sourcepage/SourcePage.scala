@@ -20,5 +20,5 @@ final case class SourcePage(source: String)(implicit internalUrl: InternalUrl) {
   def getWrappedUrlSet: WrappedUrlSet = SourcePage.HRefRegexSet.flatMap(getWrappedUrlSet)
 
   private def getWrappedUrlSet(regex: Regex): WrappedUrlSet =
-    (for { m <- regex.findAllMatchIn(source)} yield m.group(1) |> WrappedUrl.create).toSet
+    (for { m <- regex.findAllMatchIn(source) } yield m.group(1) |> WrappedUrl.create).toSet
 }

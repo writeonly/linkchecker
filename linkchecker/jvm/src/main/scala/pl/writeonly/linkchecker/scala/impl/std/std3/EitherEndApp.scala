@@ -7,7 +7,7 @@ import pl.writeonly.linkchecker.scala.impl.Apps.AbstractNextStateApply
 
 object EitherEndApp extends AbstractNextStateApply {
 
-  private val domain = "https://www.writeonly.pl"
+  private val domain = "https://writeonly.pl"
 
   def main(args: Array[String]): Unit = apply().showResult()
 

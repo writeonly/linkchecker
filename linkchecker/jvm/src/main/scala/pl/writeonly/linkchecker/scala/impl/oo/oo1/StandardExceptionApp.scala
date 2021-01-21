@@ -5,7 +5,7 @@ import pl.writeonly.linkchecker.scala.impl.Apps.AbstractOOStateApply
 
 object StandardExceptionApp extends App with AbstractOOStateApply {
 
-  private val domain = "https://www.writeonly.pl"
+  private val domain = "https://writeonly.pl"
 
   apply().showResult()
 

@@ -8,7 +8,7 @@ import scalaz.ioeffect._
 
 object Task2App extends SafeApp with ValidationAPIStateEffect[Task[ValidationAPIState]] {
 
-  private val domain = "https://www.writeonly.pl"
+  private val domain = "https://writeonly.pl"
 
   override def run(args: List[String]): IO[Void, ExitStatus] =
     effect().attempt.map(_ => ExitStatus.DoNotExit)

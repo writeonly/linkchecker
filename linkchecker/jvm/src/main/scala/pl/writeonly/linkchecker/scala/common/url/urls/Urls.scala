@@ -40,7 +40,7 @@ object Urls extends LazyLogging {
 
   def showPartThrowableList(details: Boolean, x: String, xs: Iterable[Throwable]): Unit = {
     showHeader(x + " size: " + xs.size.toString)
-    if (details) xs.map(e => e.getClass.getSimpleName  + " "  +  e.getMessage).foreach(showString)
+    if (details) xs.map(e => e.getClass.getSimpleName + " " + e.getMessage).foreach(showString)
     if (details) xs.foreach(x => logger.error(x.getMessage, x.getCause))
   }
 

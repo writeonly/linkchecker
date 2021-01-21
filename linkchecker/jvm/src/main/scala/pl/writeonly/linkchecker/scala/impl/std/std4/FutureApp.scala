@@ -9,7 +9,7 @@ import pl.writeonly.linkchecker.scala.impl.Apps.Effect
 
 object FutureApp extends Effect[EitherAPIState, ParallelStateFuture] {
 
-  private val domain = "https://www.writeonly.pl"
+  private val domain = "https://writeonly.pl"
 
   def main(args: Array[String]): Unit = apply().showResult()
 
